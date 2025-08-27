@@ -621,10 +621,10 @@
                         <p><strong data-lang="contactsPhone">Телефон:</strong><br><a href="tel:+74951234567" style="color:white;">+7 (495) 123-45-67</a></p>
                         <p><strong>Email:</strong><br><a href="mailto:booking@apexdrive.com" style="color:white;">booking@apexdrive.com</a></p>
                     </div>
-                    <form class="contact-form animate-on-scroll">
-                        <div class="form-group"><input type="text" data-lang-placeholder="formName" required></div>
-                        <div class="form-group"><input type="tel" data-lang-placeholder="formPhone" required></div>
-                        <div class="form-group"><textarea rows="5" data-lang-placeholder="formMessage"></textarea></div>
+                    <form class="contact-form animate-on-scroll" method="POST">
+                        <div class="form-group"><input type="text" name="name" data-lang-placeholder="formName" required></div>
+                        <div class="form-group"><input type="tel" name="phone" data-lang-placeholder="formPhone" required></div>
+                        <div class="form-group"><textarea name="message" rows="5" data-lang-placeholder="formMessage"></textarea></div>
                         <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: -10px; margin-bottom: 30px;">
                             <input type="checkbox" id="privacy-checkbox" style="width: auto; margin: 0;">
                             <label for="privacy-checkbox" style="font-size: 0.9rem; color: var(--secondary-text-color);">Я даю согласие на <a href="#privacy-policy" style="color: var(--orange-color); text-decoration: underline;">обработку персональных данных</a></label>
@@ -920,6 +920,57 @@
 
         privacyCheckbox.addEventListener('change', () => {
             submitButton.disabled = !privacyCheckbox.checked;
+        });
+
+        // --- Логика отправки формы на Email ---
+        const contactForm = document.querySelector('.contact-form');
+        const formNameInput = contactForm.querySelector('input[name="name"]');
+        const formPhoneInput = contactForm.querySelector('input[name="phone"]');
+        const formMessageTextarea = contactForm.querySelector('textarea[name="message"]');
+
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Предотвращаем стандартную отправку формы
+
+            // Проверяем, что чекбокс согласия на обработку данных установлен
+            if (!privacyCheckbox.checked) {
+                alert('Пожалуйста, дайте согласие на обработку персональных данных.');
+                return;
+            }
+
+            submitButton.disabled = true; // Отключаем кнопку, чтобы избежать повторных отправок
+            submitButton.textContent = 'Отправка...'; // Изменяем текст кнопки
+
+            const formData = new FormData(contactForm);
+
+            try {
+                const response = await fetch('mail.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert(result.message);
+                    // Очищаем поля формы после успешной отправки
+                    formNameInput.value = '';
+                    formPhoneInput.value = '';
+                    formMessageTextarea.value = '';
+                    privacyCheckbox.checked = false; // Снимаем галочку с чекбокса
+                    submitButton.disabled = true; // Снова отключаем кнопку
+                } else {
+                    alert('Ошибка: ' + result.message);
+                }
+            } catch (error) {
+                console.error('Ошибка при отправке формы:', error);
+                alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.');
+            } finally {
+                submitButton.textContent = translations.formButton[document.documentElement.lang]; // Возвращаем исходный текст кнопки
+                // Кнопка останется неактивной, если чекбокс не отмечен, что соответствует логике
+                if (privacyCheckbox.checked) {
+                    submitButton.disabled = false;
+                }
+            }
         });
     });
 </script>

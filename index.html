@@ -350,9 +350,11 @@
             margin-bottom: 40px; /* Добавляем отступ снизу для заголовка */
         }
         #conditions {
-            padding-top: 70px;
+            padding-top: 40px; /* Reduced padding to move the heading up */
         }
-
+        #conditions .container h2 {
+            margin-bottom: 60px;
+        }
         .privileges-grid {
             display: flex;
             flex-wrap: wrap;
@@ -367,7 +369,7 @@
         }
 
         .privilege-item, .condition-item {
-            text-align: center;
+            text-align: left; /* Aligned text to the left */
             display: flex;
             flex-direction: column;
         }
@@ -376,7 +378,7 @@
             max-width: 380px;
         }
 
-        .privilege-item .icon, .condition-item .icon { width: 80px; height: 80px; margin: 0 auto 20px; border-radius: 50%; border: 2px solid var(--border-color); color: var(--accent-color); display: flex; align-items: center; justify-content: center; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+        .privilege-item .icon, .condition-item .icon { width: 80px; height: 80px; margin: 0 0 20px; border-radius: 50%; border: 2px solid var(--border-color); color: var(--accent-color); display: flex; align-items: center; justify-content: center; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
         .privilege-item:hover .icon, .condition-item:hover .icon {
             border-color: var(--accent-color);
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);

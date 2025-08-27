@@ -341,7 +341,14 @@
         }
         .brand-logo:hover, .brand-logo.active { opacity: 1; transform: scale(1.1); filter: none; }
 
-        #contacts { background-color: var(--surface-color); }
+        #contacts {
+            background-color: var(--surface-color);
+            margin-top: 100px; /* Добавляем верхний отступ */
+            margin-bottom: 100px; /* Добавляем нижний отступ */
+        }
+        #contacts .container h2 {
+            margin-top: 20px;
+        }
         #privileges {
             background-color: var(--surface-color);
             padding-top: 90px;

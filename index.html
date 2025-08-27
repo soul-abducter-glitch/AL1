@@ -778,16 +778,26 @@
         });
         searchInput.addEventListener('input', () => {
             const searchTerm = searchInput.value.toLowerCase().trim();
+            let firstMatchFound = false; // Флаг для отслеживания первого найденного элемента
+
             if (searchTerm) {
                 filterContainer.querySelector('.active')?.classList.remove('active');
                 brandsContainer.querySelector('.active')?.classList.remove('active');
             } else {
                 filterContainer.querySelector('[data-filter="all"]').classList.add('active');
             }
+
             carCards.forEach(card => {
                 const carName = card.querySelector('h3').textContent.toLowerCase();
                 const carDescriptionRu = card.dataset.descriptionRu.toLowerCase();
-                card.classList.toggle('hide', !(carName.includes(searchTerm) || carDescriptionRu.includes(searchTerm)));
+                const isMatch = carName.includes(searchTerm) || carDescriptionRu.includes(searchTerm);
+
+                card.classList.toggle('hide', !isMatch);
+
+                if (isMatch && searchTerm && !firstMatchFound) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    firstMatchFound = true;
+                }
             });
         });
 

@@ -419,7 +419,13 @@
     outline: none;
     border-color: var(--orange-color);
 }
-        .contact-form button { width: 100%; }
+.contact-form button { width: 100%; }
+.contact-form button:disabled {
+    background-color: var(--secondary-text-color);
+    border-color: var(--secondary-text-color);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
 
         /* 7. АДАПТИВНОСТЬ */
         @media (max-width: 992px) {
@@ -619,7 +625,11 @@
                         <div class="form-group"><input type="text" data-lang-placeholder="formName" required></div>
                         <div class="form-group"><input type="tel" data-lang-placeholder="formPhone" required></div>
                         <div class="form-group"><textarea rows="5" data-lang-placeholder="formMessage"></textarea></div>
-                        <button type="submit" class="cta-button" data-lang="formButton">Отправить</button>
+                        <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: -10px; margin-bottom: 30px;">
+                            <input type="checkbox" id="privacy-checkbox" style="width: auto; margin: 0;">
+                            <label for="privacy-checkbox" style="font-size: 0.9rem; color: var(--secondary-text-color);">Я даю согласие на <a href="#privacy-policy" style="color: var(--orange-color); text-decoration: underline;">обработку персональных данных</a></label>
+                        </div>
+                        <button type="submit" class="cta-button" id="submit-button" data-lang="formButton">Отправить</button>
                     </form>
                 </div>
             </div>
@@ -900,6 +910,17 @@
 
         setupDynamicContent();
         switchLanguage('ru');
+
+        // --- Логика чекбокса и кнопки отправки ---
+        const privacyCheckbox = document.getElementById('privacy-checkbox');
+        const submitButton = document.getElementById('submit-button');
+
+        // Изначально кнопка неактивна
+        submitButton.disabled = true;
+
+        privacyCheckbox.addEventListener('change', () => {
+            submitButton.disabled = !privacyCheckbox.checked;
+        });
     });
 </script>
 

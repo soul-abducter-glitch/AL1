@@ -786,7 +786,8 @@
             }
             carCards.forEach(card => {
                 const carName = card.querySelector('h3').textContent.toLowerCase();
-                card.classList.toggle('hide', !carName.includes(searchTerm));
+                const carDescriptionRu = card.dataset.descriptionRu.toLowerCase();
+                card.classList.toggle('hide', !(carName.includes(searchTerm) || carDescriptionRu.includes(searchTerm)));
             });
         });
 

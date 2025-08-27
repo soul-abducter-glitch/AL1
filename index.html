@@ -136,7 +136,7 @@
             color: #FFFFFF; /* White text */
         }
         #cars-dropdown-list li a:hover { background-color: rgba(255, 255, 255, 0.1); }
-        #cars-dropdown-list .dropdown-brand-logo { width: 24px; height: 24px; object-fit: contain; /* filter: invert(1) brightness(2); */ }
+        #cars-dropdown-list .dropdown-brand-logo { display: none; } /* Скрываем логотипы брендов */
 
         .header-controls { display: flex; align-items: center; gap: 20px; }
         .lang-switcher { position: relative; }
@@ -829,7 +829,7 @@
                 allCarsData.sort((a,b) => a.name.localeCompare(b.name)).forEach(car => {
                     const logoSrc = brandLogos.get(car.brand) || '';
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<a href="#${car.id}"><img src="${logoSrc}" alt="${car.brand}" class="dropdown-brand-logo"><span>${car.name}</span></a>`;
+                    listItem.innerHTML = `<a href="#${car.id}"><span>${car.name}</span></a>`; // Удаляем тег <img>
                     carsDropdownList.appendChild(listItem);
                 });
             }

@@ -66,19 +66,44 @@
         .nav-wrapper { display: flex; align-items: center; gap: 25px; }
         .nav-menu ul { list-style: none; display: flex; gap: 30px; }
         .nav-menu > ul > li { position: relative; }
-        .nav-menu a { color: var(--primary-color); text-transform: uppercase; transition: color 0.3s ease; font-size: 0.9rem; }
-        .nav-menu a:hover { color: var(--accent-color); text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+        .nav-menu a {
+            color: var(--primary-color);
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            position: relative; /* Needed for ::after positioning */
+            padding-bottom: 5px; /* Space for the underline */
+        }
+        .nav-menu a:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px; /* Underline thickness */
+            background-color: #D9A855; /* Golden/amber color */
+            transform: scaleX(0); /* Hidden by default */
+            transform-origin: bottom left;
+            transition: transform 0.3s ease-out; /* Smooth animation */
+        }
+        .nav-menu a:hover::after {
+            transform: scaleX(1); /* Visible on hover */
+        }
 
         .header .nav-menu .dropdown {
             position: absolute;
             top: 100%;
             left: 0;
-            background-color: rgba(30, 30, 30, 0.95);
+            background-color: rgba(30, 30, 30, 0.9); /* Semi-transparent dark grey */
             backdrop-filter: blur(5px);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border: none; /* Remove border */
+            border-radius: 0; /* Remove border-radius */
             width: 320px;
-            padding: 10px;
+            padding: 15px 0; /* Adjusted padding */
             overflow: hidden;
             max-height: 0;
             opacity: 0;
@@ -98,9 +123,20 @@
             max-height: 380px;
             overflow-y: auto;
         }
-        #cars-dropdown-list li a { display: flex; align-items: center; gap: 15px; padding: 8px; border-radius: 5px; transition: background-color 0.2s ease; white-space: nowrap; text-transform: none; font-size: 0.95rem; }
+        #cars-dropdown-list li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 20px; /* Adjusted padding */
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+            text-transform: uppercase; /* All caps */
+            font-size: 0.9rem; /* Adjusted font size */
+            font-weight: 700; /* Bold font weight */
+            color: #FFFFFF; /* White text */
+        }
         #cars-dropdown-list li a:hover { background-color: rgba(255, 255, 255, 0.1); }
-        #cars-dropdown-list .dropdown-brand-logo { width: 24px; height: 24px; object-fit: contain; filter: invert(1) brightness(2); }
+        #cars-dropdown-list .dropdown-brand-logo { width: 24px; height: 24px; object-fit: contain; /* filter: invert(1) brightness(2); */ }
 
         .header-controls { display: flex; align-items: center; gap: 20px; }
         .lang-switcher { position: relative; }
@@ -287,8 +323,8 @@
             height: 60px;
             object-fit: contain;
             justify-self: center;
-            filter: grayscale(100%) invert(100%);
-            opacity: 0.6;
+            /* filter: grayscale(100%) invert(100%); */ /* Removed to show original colors */
+            opacity: 1; /* Set to 1 for full visibility */
             transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
             cursor: pointer;
         }
@@ -312,10 +348,11 @@
             justify-content: center;
             gap: 40px;
         }
-        .conditions-grid {
+.conditions-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 40px;
+            grid-auto-rows: 1fr;
         }
 
         .privilege-item, .condition-item {
@@ -336,7 +373,11 @@
         .privilege-item .icon svg, .condition-item .icon svg { width: 40px; height: 40px; fill: currentColor; transition: transform 0.3s ease; }
         .privilege-item:hover .icon svg, .condition-item:hover .icon svg { transform: scale(1.1); }
         .privilege-item h3, .condition-item h3 { font-size: 1.5rem; margin-bottom: 15px; }
-        .privilege-item p, .condition-item p { color: var(--secondary-text-color); }
+.privilege-item p, .condition-item p {
+            color: var(--secondary-text-color);
+            flex-grow: 1;
+            font-size: 1rem;
+        }
         .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
         .contact-info p { margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8; }
         .contact-info strong { color: var(--secondary-text-color); }

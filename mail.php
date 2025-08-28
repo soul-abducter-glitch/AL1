@@ -2,7 +2,7 @@
 header('Content-Type: application/json');
 
 // Ваш Email-адрес для получения заявок
-$recipient_email = "ВАШ_EMAIL@example.com"; // !!! ЗАМЕНИТЕ ЭТОТ АДРЕС НА СВОЙ !!!
+$recipient_email = "soul-abducter@yandex.ru"; // !!! ЗАМЕНИТЕ ЭТОТ АДРЕС НА СВОЙ !!!
 
 $response = [];
 

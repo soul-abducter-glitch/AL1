@@ -102,9 +102,9 @@
             backdrop-filter: blur(5px);
             border: none; /* Remove border */
             border-radius: 0; /* Remove border-radius */
-            width: 320px;
+            width: 400px; /* Increased width for logo and text */
             padding: 15px 0; /* Adjusted padding */
-            overflow: hidden;
+            overflow-y: auto; /* Allow scrolling for long lists */
             max-height: 0;
             opacity: 0;
             visibility: hidden;
@@ -120,8 +120,9 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            max-height: 380px;
+            max-height: 150px; /* Примерно 3-4 элемента */
             overflow-y: auto;
+            display: block; /* Убедимся, что это блок */
         }
         #cars-dropdown-list li a {
             display: flex;
@@ -129,14 +130,25 @@
             gap: 15px;
             padding: 10px 20px; /* Adjusted padding */
             transition: background-color 0.2s ease;
-            white-space: nowrap;
+            /* white-space: nowrap; */ /* УДАЛЕНО */
             text-transform: uppercase; /* All caps */
             font-size: 0.9rem; /* Adjusted font size */
             font-weight: 700; /* Bold font weight */
             color: #FFFFFF; /* White text */
+            text-align: left; /* Align text to the left */
         }
         #cars-dropdown-list li a:hover { background-color: rgba(255, 255, 255, 0.1); }
-        #cars-dropdown-list .dropdown-brand-logo { display: none; } /* Скрываем логотипы брендов */
+        #cars-dropdown-list .dropdown-brand-logo {
+            display: block; /* Make logos visible */
+            width: 30px; /* Set logo width */
+            height: 30px; /* Set logo height */
+            object-fit: contain; /* Ensure logo fits without distortion */
+            filter: brightness(0.7) grayscale(1); /* Apply initial filter for consistency */
+            transition: filter 0.3s ease;
+        }
+        #cars-dropdown-list li a:hover .dropdown-brand-logo {
+            filter: none; /* Remove filter on hover */
+        }
 
         .header-controls { display: flex; align-items: center; gap: 20px; }
         .lang-switcher { position: relative; }
@@ -872,7 +884,7 @@
                 allCarsData.sort((a,b) => a.name.localeCompare(b.name)).forEach(car => {
                     const logoSrc = brandLogos.get(car.brand) || '';
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<a href="#${car.id}"><span>${car.name}</span></a>`; // Удаляем тег <img>
+                    listItem.innerHTML = `<a href="#${car.id}"><img src="${logoSrc}" alt="${car.brand} Logo" class="dropdown-brand-logo"><span>${car.name}</span></a>`;
                     carsDropdownList.appendChild(listItem);
                 });
             }

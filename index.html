@@ -358,12 +358,13 @@
 
         #contacts {
             background-color: var(--surface-color);
-            margin-top: -40px; /* Возвращаем исходный отступ */
-            margin-bottom: 200px; /* Добавляем нижний отступ */
+            padding-top: 100px; /* Увеличиваем верхний отступ для "воздуха" */
+            padding-bottom: 100px; /* Увеличиваем нижний отступ */
         }
         #contacts .container h2 {
-            margin-top: -20px;
-            margin-bottom: 50px; /* Добавляем отступ снизу */
+            margin-bottom: 60px; /* Увеличиваем отступ снизу для заголовка */
+            font-size: 2.8rem; /* Убедимся, что заголовок соответствует другим секциям */
+            text-align: center; /* Выравниваем заголовок по центру */
         }
         #privileges {
             background-color: var(--surface-color);
@@ -415,29 +416,52 @@
             font-size: 1rem;
         }
         .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        .contact-info p { margin-bottom: 20px; font-size: 1.1rem; line-height: 1.8; }
-        .contact-info strong { color: var(--secondary-text-color); }
-        .contact-form .form-group { margin-bottom: 20px; }
+        .contact-info p { margin-bottom: 25px; font-size: 1.1rem; line-height: 1.8; } /* Увеличиваем отступ между параграфами */
+        .contact-info strong { color: var(--primary-color); font-weight: bold; display: block; margin-bottom: 5px; } /* Выделяем заголовки жирным и делаем их блочными */
+        .contact-form .form-group { margin-bottom: 25px; } /* Увеличиваем отступ между группами формы */
 .contact-form input, .contact-form textarea {
     width: 100%;
     padding: 15px;
-    background-color: var(--background-color);
+    background-color: #2A2A2A; /* Немного светлее, чем background-color, чтобы поля выделялись */
     border: 1px solid var(--border-color);
     border-radius: 5px;
     color: var(--primary-color);
     font-size: 1rem;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder {
+    color: var(--secondary-text-color); /* Делаем плейсхолдеры светлее */
+    opacity: 0.7; /* Добавляем прозрачность */
 }
 .contact-form input:focus, .contact-form textarea:focus {
     outline: none;
     border-color: var(--orange-color);
+    background-color: #252525; /* Немного темнее при фокусе */
 }
-.contact-form button { width: 100%; }
+.contact-form button {
+    width: 100%;
+    background-color: var(--orange-color); /* Используем акцентный оранжевый */
+    border: 2px solid var(--orange-color);
+    color: var(--background-color); /* Темный текст на оранжевом фоне */
+    padding: 15px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+.contact-form button:hover {
+    background-color: var(--background-color); /* Меняем фон на темный при наведении */
+    color: var(--orange-color); /* Оранжевый текст при наведении */
+    border-color: var(--orange-color);
+}
 .contact-form button:disabled {
     background-color: var(--secondary-text-color);
     border-color: var(--secondary-text-color);
     cursor: not-allowed;
     opacity: 0.7;
+    color: #555555; /* Более темный текст для неактивной кнопки */
 }
 
         /* 7. АДАПТИВНОСТЬ */
@@ -651,16 +675,16 @@
                 <div class="contact-wrapper">
                     <div class="contact-info animate-on-scroll">
                         <p><strong data-lang="contactsAddress">Адрес:</strong><br>г. Москва, ул. Примерная, д. 1, офис 101</p>
-                        <p><strong data-lang="contactsPhone">Телефон:</strong><br><a href="tel:+74951234567" style="color:white;">+7 (495) 123-45-67</a></p>
-<p><strong>Email:</strong><br><a href="mailto:soul-abducter@yandex.ru" style="color:white;">soul-abducter@yandex.ru</a></p>
+                        <p><strong data-lang="contactsPhone">Телефон:</strong><br><a href="tel:+74951234567" style="color: var(--primary-color);">+7 (495) 123-45-67</a></p>
+<p><strong data-lang="contactsEmail">Email:</strong><br><a href="mailto:soul-abducter@yandex.ru" style="color: var(--primary-color);">soul-abducter@yandex.ru</a></p>
                     </div>
                     <form class="contact-form animate-on-scroll" method="POST">
-                        <div class="form-group"><input type="text" name="name" data-lang-placeholder="formName" required></div>
-                        <div class="form-group"><input type="tel" name="phone" data-lang-placeholder="formPhone" required></div>
-                        <div class="form-group"><textarea name="message" rows="5" data-lang-placeholder="formMessage"></textarea></div>
-                        <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: -10px; margin-bottom: 30px;">
+                        <div class="form-group"><input type="text" name="name" data-lang-placeholder="formName" placeholder="Ваше имя" required></div>
+                        <div class="form-group"><input type="tel" name="phone" data-lang-placeholder="formPhone" placeholder="Ваш телефон" required></div>
+                        <div class="form-group"><textarea name="message" rows="5" data-lang-placeholder="formMessage" placeholder="Ваше сообщение"></textarea></div>
+                        <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-top: -10px; margin-bottom: 40px;"> <!-- Увеличиваем нижний отступ -->
                             <input type="checkbox" id="privacy-checkbox" style="width: auto; margin: 0;">
-                            <label for="privacy-checkbox" style="font-size: 0.9rem; color: var(--secondary-text-color);">Я даю согласие на <a href="#privacy-policy" style="color: var(--orange-color); text-decoration: underline;">обработку персональных данных</a></label>
+                            <label for="privacy-checkbox" style="font-size: 0.9rem; color: var(--secondary-text-color);">Я даю согласие на <a href="#privacy-policy" style="color: #FFB74D; text-decoration: underline;">обработку персональных данных</a></label> <!-- Изменяем оттенок оранжевого -->
                         </div>
                         <button type="submit" class="cta-button" id="submit-button" data-lang="formButton">Отправить</button>
                     </form>

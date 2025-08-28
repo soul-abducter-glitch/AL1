@@ -448,7 +448,7 @@
             #privileges, #conditions {
                 padding-top: 50px;
             }
-            .nav-menu { display: none; } /* Hide main navigation menu */
+            /* .nav-menu { display: none; } */ /* Removed to ensure menu is always in DOM */
             .nav-wrapper {
                 position: fixed;
                 top: 0;
@@ -459,16 +459,17 @@
                 background-color: #111;
                 flex-direction: column;
                 align-items: flex-start;
-                justify-content: flex-start;
-                padding: 100px 40px 40px;
+                justify-content: flex-start; /* Reverted to flex-start */
+                padding: 80px 20px 20px; /* Adjusted padding */
                 gap: 0;
                 transition: right 0.4s ease-in-out;
                 border-left: 1px solid var(--border-color);
+                overflow-y: auto; /* Added for scrolling */
             }
             .nav-wrapper.active { right: 0; }
-            .nav-menu ul { flex-direction: column; gap: 20px; width: 100%; display: flex; } /* Ensure mobile menu list is flex */
+            .nav-menu ul { flex-direction: column; gap: 20px; width: 100%; display: flex; height: auto; margin-bottom: 30px; } /* Ensure mobile menu list is flex, added height: auto and margin-bottom */
             .header .nav-menu .dropdown { position: static; opacity: 1; visibility: visible; max-height: 250px; background: none; backdrop-filter: none; padding: 10px 0 0 15px; width: 100%; border: none; }
-            .header-controls { flex-direction: column; align-items: flex-start; gap: 30px; padding-top: 30px; border-top: 1px solid var(--border-color); width: 100%;}
+            .header-controls { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); width: 100%;} /* Adjusted gap and padding-top */
             .lang-dropdown { position: static; transform: none; width: 100%; margin-top: 10px; max-height: 0; overflow: hidden; padding: 0; border: none; background-color: transparent; transition: max-height 0.4s ease; }
             .lang-dropdown.active { max-height: 100px; padding: 5px 0; }
             .search-bar.active { width: 100%; right: 0; }

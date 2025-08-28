@@ -448,9 +448,25 @@
             #privileges, #conditions {
                 padding-top: 50px;
             }
-            .nav-wrapper { position: fixed; top: 0; right: -100%; width: 80%; max-width: 320px; height: 100vh; background-color: #111; flex-direction: column; align-items: flex-start; justify-content: flex-start; padding: 100px 40px 40px; gap: 0; transition: right 0.4s ease-in-out; border-left: 1px solid var(--border-color); }
+            .nav-menu { display: none; } /* Hide main navigation menu */
+            .nav-wrapper {
+                position: fixed;
+                top: 0;
+                right: -100%; /* Initially off-screen */
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
+                background-color: #111;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                padding: 100px 40px 40px;
+                gap: 0;
+                transition: right 0.4s ease-in-out;
+                border-left: 1px solid var(--border-color);
+            }
             .nav-wrapper.active { right: 0; }
-            .nav-menu ul { flex-direction: column; gap: 20px; width: 100%; }
+            .nav-menu ul { flex-direction: column; gap: 20px; width: 100%; display: flex; } /* Ensure mobile menu list is flex */
             .header .nav-menu .dropdown { position: static; opacity: 1; visibility: visible; max-height: 250px; background: none; backdrop-filter: none; padding: 10px 0 0 15px; width: 100%; border: none; }
             .header-controls { flex-direction: column; align-items: flex-start; gap: 30px; padding-top: 30px; border-top: 1px solid var(--border-color); width: 100%;}
             .lang-dropdown { position: static; transform: none; width: 100%; margin-top: 10px; max-height: 0; overflow: hidden; padding: 0; border: none; background-color: transparent; transition: max-height 0.4s ease; }

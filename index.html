@@ -467,7 +467,8 @@
                 overflow-y: auto; /* Added for scrolling */
             }
             .nav-wrapper.active { right: 0; }
-            .nav-menu ul { flex-direction: column; gap: 20px; width: 100%; display: flex; height: auto; margin-bottom: 30px; } /* Ensure mobile menu list is flex, added height: auto and margin-bottom */
+            .nav-menu ul { flex-direction: column; gap: 20px; width: 100%; display: flex; } /* Ensure mobile menu list is flex */
+            .nav-menu a { font-size: 1.2rem; padding: 10px 0; } /* Увеличиваем размер шрифта для мобильного меню */
             .header .nav-menu .dropdown { position: static; opacity: 1; visibility: visible; max-height: 250px; background: none; backdrop-filter: none; padding: 10px 0 0 15px; width: 100%; border: none; }
             .header-controls { flex-direction: column; align-items: flex-start; gap: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); width: 100%;} /* Adjusted gap and padding-top */
             .lang-dropdown { position: static; transform: none; width: 100%; margin-top: 10px; max-height: 0; overflow: hidden; padding: 0; border: none; background-color: transparent; transition: max-height 0.4s ease; }
@@ -478,7 +479,9 @@
             .burger-menu.active .line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
             .burger-menu.active .line:nth-child(2) { opacity: 0; }
             .burger-menu.active .line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-            .hero-content h1 { font-size: 2.5rem; } .contact-wrapper { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content p { font-size: 1rem; }
+            .contact-wrapper { grid-template-columns: 1fr; }
 
             .modal-content { margin: 10% auto; padding: 20px; }
             .modal-body { grid-template-columns: 1fr; }
